@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 const User = require('../models/users');
 const passport = require('passport');
 const auth = require('../middleware/auth');
@@ -39,7 +38,7 @@ userRouter.post('/signup', (req, res, next) => {
         });
 });
 // signin
-router.post('/signin', passport.authenticate('local'), (req, res) => {
+userRouter.post('/signin', passport.authenticate('local'), (req, res) => {
     var token = auth.getToken({ _id: req.user._id });
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');

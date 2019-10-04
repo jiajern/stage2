@@ -3,23 +3,8 @@ var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
 require('mongoose-currency').loadType(mongoose);
 const Currency = mongoose.Types.Currency;
-
-var Stock = new Schema({
-    symbol:{
-        type: String,
-        required: true
-    },
-    quantity:{
-        type: Number,
-        require: true
-    },
-    price:{
-        type: Currency,
-        require: true
-    }
-}, {
-    timestamps: true
-});
+const Stocks = require('./stocks');
+const Transactions = require('./transactions');
 
 var User = new Schema({
     email: {
@@ -40,7 +25,8 @@ var User = new Schema({
         default: 5000,
         min: 0
     },
-    own_stock: [Stock],
+    own_stock: [Stocks],
+    transaction: [Transactions],
     verified: {
         type: Boolean,
         default: false
