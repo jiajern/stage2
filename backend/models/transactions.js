@@ -8,6 +8,10 @@ var Transaction = new Schema({
         type: String,
         required: true
     },
+    price: {
+        type: Currency,
+        required: true
+    },
     quantity:{
         type: Number,
         min: 1,
