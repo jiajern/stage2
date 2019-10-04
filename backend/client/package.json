@@ -1,9 +1,9 @@
 {
-    "name": "react-jwt-authentication-example",
+    "name": "stage2-frontend",
     "version": "1.0.0",
     "repository": {
         "type": "git",
-        "url": "https://github.com/cornflourblue/react-jwt-authentication-example.git"
+        "url": "https://github.com/jiajern/stage2"
     },
     "license": "MIT",
     "scripts": {
