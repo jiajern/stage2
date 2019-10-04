@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 userRouter.use(bodyParser.json());
 // signup
 userRouter.post('/signup', (req, res, next) => {
-    Users.register(new User({ email: req.body.email }),
+    Users.register(new Users({ email: req.body.email }),
         req.body.password, (err, user) => {
             if (err) {
                 res.statusCode = 500;

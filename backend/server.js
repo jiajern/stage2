@@ -6,6 +6,7 @@ const logger = require('morgan');
 const auth = require('./middleware/auth');
 // routers
 const userRouter = require('./routes/userRoute');
+const transRouter = require('./routes/transRoute');
 // config
 require('dotenv').config();
 const app = express();
@@ -29,7 +30,7 @@ connection.then((db) => {
   });
 // routes
 app.use('/api/user', userRouter);
-
+app.use('/api', transRouter);
 
 
 // error handler

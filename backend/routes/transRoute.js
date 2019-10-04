@@ -1,14 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const Transactions = require('../models/transactions');
+const Users = require('../models/users');
 const transRouter = express.Router();
 var auth = require('../middleware/auth');
-const transRouter = express.Router();
 
 transRouter.use(bodyParser.json());
-// get all trans
-transRouter.get('/:userId', auth.verifyUser, (req, res, next) => {
-
+// post
+// buy new stock
+transRouter.post('/stock/:userId', auth.verifyUser, (req, res, next) => {
+    
 });
+// TODO
+// update
 // sell a stock
 // buy a stock
+
+module.exports = transRouter;
