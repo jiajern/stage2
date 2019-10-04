@@ -1,6 +1,6 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var User = require('./models/users');
+var User = require('../models/users');
 var JwtStrategy = require('passport-jwt').Strategy;
 var ExtractJwt = require('passport-jwt').ExtractJwt;
 var jwt = require('jsonwebtoken');
@@ -8,7 +8,9 @@ var jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 // use static authenticate method of model in LocalStrategy
-passport.use(new LocalStrategy(User.authenticate()));
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+},User.authenticate()));
 
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());

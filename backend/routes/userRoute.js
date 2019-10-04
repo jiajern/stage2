@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const Users = require('../models/users');
-const userRouter = express.Router();
+const User = require('../models/users');
+const passport = require('passport');
 const auth = require('../middleware/auth');
+const userRouter = express.Router();
+
 
 userRouter.use(bodyParser.json());
 // signup
@@ -37,11 +39,16 @@ userRouter.post('/signup', (req, res, next) => {
         });
 });
 // signin
-userRouter.post('/signin', (req, res, next) => {
-
+router.post('/signin', passport.authenticate('local'), (req, res) => {
+    var token = auth.getToken({ _id: req.user._id });
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json({ success: true, token: token, status: 'You are successfully logged in!' });
 });
 // getting user profile
 
 // create user profile
 
 //updating the user profile
+
+module.exports = userRouter;
