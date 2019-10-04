@@ -25,4 +25,4 @@ var Stock = new Schema({
     timestamps: true
 });
 
-module.exports = mongoose.model('Stock', Stock);
+module.exports = Stock;

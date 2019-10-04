@@ -7,8 +7,8 @@ const transRouter = express.Router();
 
 transRouter.use(bodyParser.json());
 // get all trans
-transRouter.get(auth.verifyUser, '/:userId', (req, res, next) => {
-    
+transRouter.get('/:userId', auth.verifyUser, (req, res, next) => {
+
 });
 // sell a stock
 // buy a stock
