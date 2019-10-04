@@ -2,13 +2,27 @@ import React from 'react';
 
 import { userService, authenticationService } from '@/_services';
 
+const Stock = (props) => {
+    return(
+    <div>
+        <span>{props.symbol} - {props.share} Shares  </span>
+        <span>${props.price}</span>    
+    </div>
+    )
+}
+
 class HomePage extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             currentUser: authenticationService.currentUserValue,
-            user: null
+            user: null,
+            fakeStock: [
+                {symbol:'AAPL',share:12,price:227.10},
+                {symbol:'MSFT',share:13,price:138.14},
+                {symbol:'GOOG',share:11,price:1209.20}
+            ]
         };
     }
 
@@ -21,17 +35,25 @@ class HomePage extends React.Component {
         console.log(user);
         return (
             <div>
-                <h1>Hi {currentUser.firstName}!</h1>
-                <p>You're logged in with React & JWT!!</p>
-                <h3>Users from secure api end point:</h3>
                 {user &&
+                    <div>
                     <h1>Hi, {user.firstname}</h1>
+                    <h3>Balance: ${user.balance}</h3>
+                    <h3>Value: </h3>
+                    </div>
                 }
-                {/* {users &&
-                    <ul>
-                        <h1>Hi, {user.firstname}</h1>
-                    </ul>
-                } */}
+                {user &&
+                    <div>
+                    <div>portfolio</div>
+                    {this.state.fakeStock.map((s) => {
+                      return <Stock 
+                                symbol={s.symbol}
+                                price={s.price}
+                                share={s.share}
+                                key={s.symbol} />
+                    })}
+                    </div>
+                }
             </div>
         );
     }
