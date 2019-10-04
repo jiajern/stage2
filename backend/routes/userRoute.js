@@ -4,7 +4,7 @@ const Users = require('../models/users');
 const passport = require('passport');
 const auth = require('../middleware/auth');
 const userRouter = express.Router();
-
+const jwt = require('jsonwebtoken');
 
 userRouter.use(bodyParser.json());
 // signup
@@ -78,6 +78,32 @@ userRouter.get('/:userId', auth.verifyUser, (req, res, next) => {
 });
 // updating the user profile
 userRouter.put('/:userId', auth.verifyUser, (req, res, next) => {
-
+    var userId = req.params.userId;
+    var currentUser = req.headers;
+    var token = currentUser.authorization.split(" ")[1];
+    currentUser = jwt.decode(token)._id;
+    if (currentUser !== userId) {
+        res.statusCode = 403;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({ status: 403, message: "Not allowed" });
+    }
+    Users.findByIdAndUpdate(userId, {
+        // TODO
+        $set: req.body
+    }, { new: true })
+        .then((user) => {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json(user)
+        }, (err) => {
+            res.statusCode = 500;
+            res.setHeader('Content-Type', 'application/json');
+            res.json({ err: err });
+        })
+        .catch((err) => {
+            res.statusCode = 500;
+            res.setHeader('Content-Type', 'application/json');
+            res.json({ err: err });
+        })
 });
 module.exports = userRouter;
