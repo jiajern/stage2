@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { userService, authenticationService } from '@/_services';
+import { userService, authenticationService, stockService } from '@/_services';
 
 const Stock = (props) => {
     return(
@@ -22,17 +22,19 @@ class HomePage extends React.Component {
                 {symbol:'AAPL',share:12,price:227.10},
                 {symbol:'MSFT',share:13,price:138.14},
                 {symbol:'GOOG',share:11,price:1209.20}
-            ]
+            ],
+            fakeSymbols: ['AAPL','MSFT','GOOG']
         };
     }
 
     componentDidMount() {
         userService.getUser().then(user => this.setState({ user }));
+        stockService.getStocks(this.state.fakeSymbols).then(stocks => this.setState({stocks}));;
     }
 
     render() {
-        const { currentUser, user } = this.state;
-        console.log(user);
+        const { currentUser, user, stocks } = this.state;
+        console.log(stocks);
         return (
             <div>
                 {user &&
