@@ -5,18 +5,18 @@
 
 ## Routes:
 ### Public
-- (post) /api/user/signup
+- (post) /api/user/signup </br>
 name, email, password
-- (post) /api/user/signin
+- (post) /api/user/signin </br>
 email, password
 ### Protected
-- (get)  /api/user/:userId
-- (put)  /api/user/:userId
+- (get)  /api/user/:userId </br>
+- (put)  /api/user/:userId </br>
 user's attribute
-- (get)  /api/stock?symbol=
+- (get)  /api/stock?symbol= </br>
 query param
-- (post) /api/stock/buy/:userId
+- (post) /api/stock/buy/:userId </br>
 symbol quantity price
-- (post) /api/stock/sell/:userId
+- (post) /api/stock/sell/:userId </br>
 symbol quantity price
-- (post) /api/user/ultimate/:userId
+- (post) /api/user/ultimate/:userId </br>
