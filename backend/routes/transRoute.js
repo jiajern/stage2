@@ -22,6 +22,21 @@ transRouter.get('/stock', auth.verifyUser, (req, res, next) => {
 
 })
 // post
+transRouter.post('/user/ultimate/:userId', auth.verifyUser, (req, res, next) => {
+    Users.findByIdAndUpdate(userId, {
+        $set: update
+    }, {new: true})
+    .then((user) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(user)
+    })
+    .catch((err) => {
+        res.statusCode = 500;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({ err: err });
+    })
+})
 // buy stock
 transRouter.post('/stock/:userId', auth.verifyUser, (req, res, next) => {
     var userId = req.params.userId;
